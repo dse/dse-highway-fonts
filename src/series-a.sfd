@@ -1,14 +1,14 @@
 SplineFontDB: 3.2
-FontName: Untitled1
-FullName: Untitled1
-FamilyName: Untitled1
+FontName: DSESeriesA
+FullName: DSE Series A
+FamilyName: DSE Series A
 Weight: Regular
 Copyright: Copyright (c) 2022, Darren Embry
 UComments: "2022-5-7: Created with FontForge (http://fontforge.org)"
 Version: 001.000
 ItalicAngle: 0
-UnderlinePosition: -220
-UnderlineWidth: 109
+UnderlinePosition: -144
+UnderlineWidth: 72
 Ascent: 960
 Descent: 192
 InvalidEm: 0
