@@ -1,12 +1,13 @@
 # dse-highway-fonts
 
 An effort to use the dimensional drawings from the 1961 reprint of
-Standard Alphabets for Highway Signs to create niche fonts.
+Standard Alphabets for Highway Signs to create certain fonts.
 
 Currently we offer:
 
 -   Series A, one of the original Standard Alphabets for Highway
-    Signs.  **Deprecated.  Do not use for actual highway signs.**
+    Signs.  **This series was deprecated by the Federal Highway
+    Administration.  Do not use Series A for actual highway signs.**
 
 # Sources
 
