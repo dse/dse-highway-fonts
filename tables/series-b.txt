@@ -1,0 +1,130 @@
+# Series B
+
+## Letter & Numeral Widths and Space between Letters or Numerals
+
+### Table 1 - Letter to Letter Code Number
+
+Also applies to Series C, D, and E
+
+[1] Preceding Letter
+[2] Following Letter BDEFHIKLMNPRU
+[3] Following Letter CGOQSXZ
+[4] Following Letter AJTVWY
+
+[1] [2] [3] [4]
+A   2   2   4
+B   1   2   2
+C   2   2   3
+D   1   2   2
+E   2   2   3
+F   2   2   3
+G   1   2   2
+H   1   1   2
+I   1   1   2
+J   1   1   2
+K   2   2   3
+L   2   2   4
+M   1   1   2
+N   1   1   2
+O   1   2   2
+P   1   2   2
+Q   1   2   2
+R   1   2   2
+S   1   2   2
+T   2   2   4
+U   1   1   2
+V   2   2   4
+W   2   2   4
+X   2   2   3
+Y   2   2   4
+Z   2   2   3
+
+### Table 2 - Numeral to Numeral Code Number
+
+Also applies to Series C, D, and E
+
+[1] Preceding Numeral
+[2] Following Numeral 15
+[3] Following Numeral 236890
+[4] Following Numeral 47
+
+[1] [2] [3] [4]
+1   1   1   2
+2   1   2   2
+3   1   2   2
+4   2   2   4
+5   1   2   2
+6   1   2   2
+7   2   2   4
+8   1   2   2
+9   1   2   2
+0   1   2   2
+
+### Table III - Width of Stroke, at 8 inches letter height, in inches
+
+1.0
+
+### Table IV - Width of Letter, at 8 inches letter height, in inches
+
+A   4.250
+B   3.375
+C   3.375
+D   3.375
+E   3.000
+F   3.000
+G   3.375
+H   3.375
+I   1.000
+J   3.500
+K   3.500
+L   3.000
+M   3.875
+N   3.375
+O   3.625
+P   3.375
+Q   3.625
+R   3.375
+S   3.375
+T   3.000
+U   3.375
+V   3.6875
+W   5.000
+X   3.6875
+Y   4.250
+Z   3.375
+
+### Table V - Width of Numerals
+
+1   1.625
+2   3.375
+3   3.375
+4   3.875
+5   3.375
+6   3.375
+7   3.375
+8   3.375
+9   3.375
+0   3.625
+
+### Table VI - Letter Space in Inches
+
+Measured horizontally from the extreme right edge of the preceding letter to the extreme left edge of the following letter
+
+[1] Code Number
+[2] Spacing at 8 Inch Letter Height
+[3] 10"
+[4] 12"
+[5] 18"
+
+[1] [2]     [3]     [4]     [5]
+1   1.5     1.88    2.25    3.37
+2   1.2     1.50    1.80    2.70
+3   0.8     1.00    1.20    1.80
+4   0.4     0.50    0.60    0.90
+
+    8"      10"     12"     18"
+------------------------------------
+1   1.5     1.875   2.25    3.375
+2   1.2     1.5     1.8     2.7
+3   0.8     1       1.2     1.8
+4   0.4     0.5     0.6     0.9

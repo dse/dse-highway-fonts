@@ -1,0 +1,71 @@
+# Series E
+
+### Table III - Width of Stroke, at 8 inches letter height, in inches
+
+1.375
+
+### Table IV - Width of Letter, at 8 inches letter height, in inches
+
+A   8
+B   6.375
+C   6.375
+D   6.375
+E   5.875
+F   5.875
+G   6.375
+H   6.375
+I   1.375
+J   6
+K   6.5
+L   5.875
+M   7.375
+N   6.375
+O   6.625
+P   6.375
+Q   6.625
+R   6.375
+S   6.375
+T   5.875
+U   6.375
+V   7.25
+W   8.375
+X   6.875
+Y   8
+Z   6.375
+
+### Table V - Width of Numerals
+
+1   2.375
+2   6.375
+3   6.375
+4   7.375
+5   6.375
+6   6.375
+7   6.375
+8   6.375
+9   6.375
+0   6.625
+
+### Table VI - Letter Space in Inches
+
+Measured horizontally from the extreme right edge of the preceding letter to the extreme left edge of the following letter
+
+[1] Code Number
+[2] Spacing at 8 Inch Letter Height
+[3] 10"
+[4] 12"
+[5] 18"
+
+    8"      10"     12"     18"
+------------------------------------
+1   2.05    2.58    3.09    4.64
+2   1.65    2.06    2.48    3.71
+3   1.10    1.37    1.65    2.47
+4   0.55    0.68    0.82    1.24
+
+    8"      10"         12"     18"
+--------------------------------------------
+1	2.0625	2.578125	3.09375	4.640625
+2	1.65	2.0625      2.475	3.7125
+3	1.1     1.375       1.65	2.475
+4	0.55	0.6875      0.825	1.2375
