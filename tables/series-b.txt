@@ -1,65 +1,5 @@
 # Series B
 
-## Letter & Numeral Widths and Space between Letters or Numerals
-
-### Table 1 - Letter to Letter Code Number
-
-Also applies to Series C, D, and E
-
-[1] Preceding Letter
-[2] Following Letter BDEFHIKLMNPRU
-[3] Following Letter CGOQSXZ
-[4] Following Letter AJTVWY
-
-[1] [2] [3] [4]
-A   2   2   4
-B   1   2   2
-C   2   2   3
-D   1   2   2
-E   2   2   3
-F   2   2   3
-G   1   2   2
-H   1   1   2
-I   1   1   2
-J   1   1   2
-K   2   2   3
-L   2   2   4
-M   1   1   2
-N   1   1   2
-O   1   2   2
-P   1   2   2
-Q   1   2   2
-R   1   2   2
-S   1   2   2
-T   2   2   4
-U   1   1   2
-V   2   2   4
-W   2   2   4
-X   2   2   3
-Y   2   2   4
-Z   2   2   3
-
-### Table 2 - Numeral to Numeral Code Number
-
-Also applies to Series C, D, and E
-
-[1] Preceding Numeral
-[2] Following Numeral 15
-[3] Following Numeral 236890
-[4] Following Numeral 47
-
-[1] [2] [3] [4]
-1   1   1   2
-2   1   2   2
-3   1   2   2
-4   2   2   4
-5   1   2   2
-6   1   2   2
-7   2   2   4
-8   1   2   2
-9   1   2   2
-0   1   2   2
-
 ### Table III - Width of Stroke, at 8 inches letter height, in inches
 
 1.0
@@ -108,7 +48,8 @@ Z   3.375
 
 ### Table VI - Letter Space in Inches
 
-Measured horizontally from the extreme right edge of the preceding letter to the extreme left edge of the following letter
+Measured horizontally from the extreme right edge of the preceding
+letter to the extreme left edge of the following letter
 
 [1] Code Number
 [2] Spacing at 8 Inch Letter Height
