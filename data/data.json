@@ -100,12 +100,18 @@
                 "P1": "HIJMNU1",
                 "P2": "BDGOPQRS2356890",
                 "P3": "CEFKXZ",
-                "P4": "ALTVWY47"
+                "P4": "ALTVWY47",
+                "": [
+                    "these relate to the right bearings"
+                ]
             },
             "following": {
                 "F1": "BDEFHIKLMNPRU15",
                 "F2": "CGOQSXZ236890",
-                "F3": "AJTVWY47"
+                "F3": "AJTVWY47",
+                "": [
+                    "these relate to the left bearings"
+                ]
             },
             "pairs": {
                 "P1-F1": 1,
