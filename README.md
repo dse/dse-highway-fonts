@@ -1,13 +1,25 @@
 # dse-highway-fonts
 
-An effort to use the dimensional drawings from the 1961 reprint of
-Standard Alphabets for Highway Signs to create certain fonts.
+An effort to create fonts based on the **original FHWA 1945
+dimensional drawings** for their _Standard Alphabets for Highway
+Signs_.
 
-Currently we offer:
+Only the uppercase letters and digits were specified, so at present
+time only those are included.  Additional punctuation may be provided
+based on later specifications.
+
+Currently available:
 
 -   Series A, one of the original Standard Alphabets for Highway
-    Signs.  **This series was deprecated by the Federal Highway
+    Signs.
+    
+    **This series was deprecated by the Federal Highway
     Administration.  Do not use Series A for actual highway signs.**
+    
+    Apparently it is still used in some places in Australia.
+
+-   Series B, in use on street name signs, parking signs, and other
+    uses where more text must fit on the sign.
 
 # Sources
 
