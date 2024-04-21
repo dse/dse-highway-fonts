@@ -8,13 +8,16 @@ Only the uppercase letters and digits were specified, so at present
 time only those are included.  Additional punctuation may be provided
 based on later specifications.
 
+Kerning pairs are based on the 1966 edition, which provided character
+spacing tables.
+
 Currently available:
 
--   Series A, one of the original Standard Alphabets for Highway
-    Signs.
+-   Series A, an ultra-compressed variant that is no longer in use in
+    the United States, but was one of the original variants from 1945.
     
-    **This series was deprecated by the Federal Highway
-    Administration.  Do not use Series A for actual highway signs.**
+    **Series A was deprecated by the Federal Highway Administration.
+    Do not use Series A for actual highway signs.**
     
     Apparently it is still used in some places in Australia.
 
