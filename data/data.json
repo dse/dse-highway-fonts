@@ -125,17 +125,20 @@
                 "P3-F3": 3,
                 "P4-F1": 2,
                 "P4-F2": 2,
-                "P4-F3": 4
+                "P4-F3": 4,
+                "notes": [
+                    "these are indexes into one of the spacing arrays"
+                ]
             }
         }
     },
     "strokeWidth": {
-        "Series A": 0.75,
-        "Series B": 1.00,
-        "Series C": 1.12,
-        "Series D": 1.25,
-        "Series E": 1.38,
-        "Series E (Modified)": 1.60,
-        "Series F": 1.50
+        "Series A": 0.7500,
+        "Series B": 1.0000,
+        "Series C": 1.1250,
+        "Series D": 1.2500,
+        "Series E": 1.3750,
+        "Series E (Modified)": 1.6000,
+        "Series F": 1.5000
     }
 }
