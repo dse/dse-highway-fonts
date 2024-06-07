@@ -1,0 +1,76 @@
+#!/usr/bin/env fontforge
+# -*- mode: python; coding: utf-8 -*-
+
+import fontforge
+import json
+import os
+
+dataJson = open("data/data.json", "r").read()
+data = json.loads(dataJson)
+data1966 = data["1966"]
+kerningClasses = data1966["kerningClasses"]
+preceding = kerningClasses["preceding"]
+following = kerningClasses["following"]
+capHeight = data["capHeight"]   # e.g., 768
+unitBasis = data1966["unitBasis"]   # e.g., 8 (4 for year 2000 metrics)
+unit = capHeight / unitBasis    # e.g., 96
+
+def setKerningPairs(filename, seriesName):
+    font = fontforge.open(filename)
+    for char in font:
+        font[char].left_side_bearing = 0
+        font[char].right_side_bearing = 0
+    strokeWidth = data1966["strokeWidth"][seriesName] # e.g., 0.75
+    try:
+        font.removeLookupSubtable("kern-1")
+    except OSError as e:
+        if str(e) == "No subtable named kern-1 exists":
+            print("No subtable named kern-1 existed")
+            pass
+        else:
+            raise
+    try:
+        font.removeLookup("kern")
+    except OSError as e:
+        if str(e) == "No lookup named kern exists":
+            print("No lookup named kern existed")
+            pass
+        else:
+            raise
+    font.addLookup("kern", "gpos_pair", None, [["kern", [["latn", ["dflt"]]]]])
+    for precedingClass in preceding: # e.g., "p1"
+        if precedingClass == "":
+            continue
+        for followingClass in following: # e.g., "f1"
+            if followingClass == "":
+                continue
+            className = precedingClass + followingClass # "p1f1"
+            spacingCode = kerningClasses["pairs"][className] # 1, 2, 3, 4
+            spacing = round(unit * data1966["spacing"][seriesName][spacingCode])
+            precedingChars = preceding[precedingClass] # e.g., "HIJMNU1"
+            followingChars = following[followingClass] # e.g., "BDEFHIKLMNPRU15"
+
+            spacings = []
+            chars1 = []
+            chars2 = []
+            for char1 in precedingChars:
+                chars1.append(char1)
+            for char2 in followingChars:
+                chars2.append(char2)
+            for char1 in precedingChars:
+                for char2 in followingChars:
+                    spacings.append(spacing)
+            chars1Tuple = tuple(chars1)
+            chars2Tuple = tuple(chars2)
+            spacingsTuple = tuple(spacings)
+            font.addKerningClass("kern", className, tuple(chars1), tuple(chars2), tuple(spacingsTuple))
+            print(chars1)
+            print(chars2)
+            print(tuple(spacingsTuple))
+    if os.path.splitext(filename)[1] == ".sfd":
+        font.save(filename)
+    else:
+        font.generate(filename)
+
+setKerningPairs("src/series-a.sfd", "Series A")
+setKerningPairs("src/series-b.sfd", "Series B")
