@@ -651,7 +651,24 @@
                 "?":  [ 0.400 , 3.362 , 0.400 ]
             }
         },
-        "strokeWidths": {
+        "strokeWidth": {
+            "Series B": 0.520,
+            "Series C": 0.560,
+            "Series D": 0.640,
+            "Series E": 0.720,
+            "Series E (Modified)": 0.800,
+            "Series F": 0.760
         },
+    },
+    "spaceWidth": {
+        "basis": 1.0,
+        "OC Highway VAR": {
+            "Series A": 0.27612,
+            "Series B": 0.29851,
+            "Series C": 0.32090,
+            "Series D": 0.34328,
+            "Series E": 0.36567,
+            "Series F": 0.38806
+        }
     }
 }
