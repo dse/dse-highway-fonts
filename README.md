@@ -26,14 +26,33 @@ Currently available:
 
 # Sources
 
--   1952 http://www.trafficsign.us/signtypeface.html
+-   [The original 1945 edition][1945].
 
--   1977 https://www.google.com/books/edition/Standard_Alphabets_for_Highway_Signs_and/cBWcvnGmBXEC?hl=en
+-   [The 1952 edition][1952], to which is affixed some character
+    spacing tables of uncertain origin.
 
--   1966 https://archive.org/details/standard-alphabets-for-highway-signs-1966
+-   The 1961 edition, which included character spacing tables.
 
--   1961 http://www.trafficsign.us/oldmutcd.html
 
--   2004 MUTCD https://mutcd.fhwa.dot.gov/ser-shs_millennium_eng.htm
+-   Forbes, Theodore W.; Moskowitz, Karl; and Morgan, Glen (1950).
+    ["A Comparison of Lower Case and Capital Letters for Highway Signs"][forbes1950].
+    _Proceedings of the Highway Research Board._ pp. 355–373.
 
--   2009 MUTCD https://mutcd.fhwa.dot.gov/kno_2009r1r2.htm
+
+
+[current]: https://mutcd.fhwa.dot.gov/SHSe/Alphabets.pdf
+
+[1977]: https://www.google.com/books/edition/Standard_Alphabets_for_Highway_Signs_and/cBWcvnGmBXEC?hl=en&gbpv=1&dq=standard+alphabets+for+highway+signs&printsec=frontcover
+
+[1966]: https://archive.org/details/standard-alphabets-for-highway-signs-1966
+
+[1945]: https://www.google.com/books/edition/Standard_Alphabets_for_Highway_Signs/zDsVm2p1tvgC?hl=en&gbpv=1&dq=standard+alphabets+for+highway+signs&printsec=frontcover
+
+[forbes1950]: https://onlinepubs.trb.org/Onlinepubs/hrbproceedings/30/30-035.pdf
+
+[1952]: https://books.google.com/books/about/Standard_Alphabets_for_Highway_Signs.html?id=mHksAQAAMAAJ
+
+<!-- [2004]: https://mutcd.fhwa.dot.gov/ser-shs_millennium_eng.htm -->
+
+<!-- [2009]: https://mutcd.fhwa.dot.gov/kno_2009r1r2.htm -->
+
