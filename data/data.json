@@ -1,7 +1,7 @@
 {
     "capHeight": 768,
-    "unitBasis": 8,
     "1966": {
+        "unitBasis": 8,
         "notes": [
             "requires all left/right bearings be zero, by default"
         ],
@@ -150,6 +150,7 @@
         }
     },
     "2000": {
+        "unitBasis": 4,
         "metrics": {
             "Series B": {
                 "A":  [ 0.120 , 2.161 , 0.120 ],
