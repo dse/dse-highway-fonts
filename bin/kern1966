@@ -11,21 +11,24 @@ data1966 = data["1966"]
 kerningClasses = data1966["kerningClasses"]
 preceding = kerningClasses["preceding"]
 following = kerningClasses["following"]
-capHeight = data["capHeight"]   # e.g., 768
+pairIndexes = kerningClasses["pairs"]
 unitBasis = data1966["unitBasis"]   # e.g., 8 (4 for year 2000 metrics)
-unit = capHeight / unitBasis    # e.g., 96
+strokeWidths = data1966["strokeWidth"]
+spaceWidths = data["spaceWidth"]["OC Highway VAR"]
+spaceWidthBasis = data["spaceWidth"]["basis"]
 
 def setKerningPairs(filename, seriesName):
+    spacings = data1966["spacing"][seriesName]
     font = fontforge.open(filename)
+    unit = font.capHeight / unitBasis
+    strokeWidth = strokeWidths[seriesName] # e.g., 0.75
     for char in font:
-        font[char].left_side_bearing = 0
-        font[char].right_side_bearing = 0
-    strokeWidth = data1966["strokeWidth"][seriesName] # e.g., 0.75
+        font[char].left_side_bearing = int(round(strokeWidth * 0.75))
+        font[char].right_side_bearing = int(round(strokeWidth * 0.75))
     try:
         font.removeLookupSubtable("kern-1")
     except OSError as e:
         if str(e) == "No subtable named kern-1 exists":
-            print("No subtable named kern-1 existed")
             pass
         else:
             raise
@@ -33,40 +36,35 @@ def setKerningPairs(filename, seriesName):
         font.removeLookup("kern")
     except OSError as e:
         if str(e) == "No lookup named kern exists":
-            print("No lookup named kern existed")
             pass
         else:
             raise
-    font.addLookup("kern", "gpos_pair", None, [["kern", [["latn", ["dflt"]]]]])
-    for precedingClass in preceding: # e.g., "p1"
-        if precedingClass == "":
-            continue
-        for followingClass in following: # e.g., "f1"
-            if followingClass == "":
-                continue
-            className = precedingClass + followingClass # "p1f1"
-            spacingCode = kerningClasses["pairs"][className] # 1, 2, 3, 4
-            spacing = round(unit * data1966["spacing"][seriesName][spacingCode])
-            precedingChars = preceding[precedingClass] # e.g., "HIJMNU1"
-            followingChars = following[followingClass] # e.g., "BDEFHIKLMNPRU15"
+    font.addLookup("kern", "gpos_pair", None, (("kern", (("DFLT", ("dflt")),("latn", ("dflt")),)),))
 
-            spacings = []
-            chars1 = []
-            chars2 = []
-            for char1 in precedingChars:
-                chars1.append(char1)
-            for char2 in followingChars:
-                chars2.append(char2)
-            for char1 in precedingChars:
-                for char2 in followingChars:
-                    spacings.append(spacing)
-            chars1Tuple = tuple(chars1)
-            chars2Tuple = tuple(chars2)
-            spacingsTuple = tuple(spacings)
-            font.addKerningClass("kern", className, tuple(chars1), tuple(chars2), tuple(spacingsTuple))
-            print(chars1)
-            print(chars2)
-            print(tuple(spacingsTuple))
+    # set width of space
+    font[32].width = 0
+    font[32].left_side_bearing = int(0)
+    font[32].right_side_bearing = int(round(spaceWidths[seriesName] / spaceWidthBasis * font.capHeight))
+
+    precedingDict = kerningClasses["preceding"]
+    followingDict = kerningClasses["following"]
+    precedingClassNames = list(filter(lambda x: x != "", [x for x in precedingDict]))
+    followingClassNames = list(filter(lambda x: x != "", [x for x in followingDict]))
+
+    for precedingClass in precedingClassNames: # "p1", ...
+        for followingClass in followingClassNames: # "f1", ...
+            kerningClassName = precedingClass + followingClass
+            spacingIndex = precedingClass + followingClass # "p1f1", ...
+            spacingCode = pairIndexes[spacingIndex]        # 1, 2, ...
+            spacing = int(round(unit * spacings[spacingCode]))
+            precedingChars = list([x for x in precedingDict[precedingClass]]) # ['0', ...]
+            followingChars = list([x for x in followingDict[followingClass]])
+            precedingCharNames = tuple([font[ord(c)].glyphname for c in precedingChars]) # ("zero", ...)
+            followingCharNames = tuple([font[ord(c)].glyphname for c in followingChars])
+            precedingTuple = (None, precedingCharNames) # seems like a bug that I have to prepend None.
+            followingTuple = (None, followingCharNames) # ditto.
+            spacingTuple = tuple([spacing] * len(precedingTuple) * len(followingTuple))
+            font.addKerningClass("kern", kerningClassName, precedingTuple, followingTuple, spacingTuple)
     if os.path.splitext(filename)[1] == ".sfd":
         font.save(filename)
     else:
@@ -74,3 +72,5 @@ def setKerningPairs(filename, seriesName):
 
 setKerningPairs("src/series-a.sfd", "Series A")
 setKerningPairs("src/series-b.sfd", "Series B")
+
+# feature-script-lang tuple
