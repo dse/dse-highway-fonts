@@ -2,100 +2,7 @@
     "capHeight": 768,
     "1966": {
         "unitBasis": 8,
-        "notes": [
-            "requires all left/right bearings be zero, by default"
-        ],
-        "letterToLetter": {
-            "preceding": {
-                "A": [2, 2, 4],
-                "B": [1, 2, 2],
-                "C": [2, 2, 3],
-                "D": [1, 2, 2],
-                "E": [2, 2, 3],
-                "F": [2, 2, 3],
-                "G": [1, 2, 2],
-                "H": [1, 1, 2],
-                "I": [1, 1, 2],
-                "J": [1, 1, 2],
-                "K": [2, 2, 3],
-                "L": [2, 2, 4],
-                "M": [1, 1, 2],
-                "N": [1, 1, 2],
-                "O": [1, 2, 2],
-                "P": [1, 2, 2],
-                "Q": [1, 2, 2],
-                "R": [1, 2, 2],
-                "S": [1, 2, 2],
-                "T": [2, 2, 4],
-                "U": [1, 1, 2],
-                "V": [2, 2, 4],
-                "W": [2, 2, 4],
-                "X": [2, 2, 3],
-                "Y": [2, 2, 4],
-                "Z": [2, 2, 3]
-            },
-            "following": {
-                "B": 0,
-                "D": 0,
-                "E": 0,
-                "F": 0,
-                "H": 0,
-                "I": 0,
-                "K": 0,
-                "L": 0,
-                "M": 0,
-                "N": 0,
-                "P": 0,
-                "R": 0,
-                "U": 0,
-                "C": 1,
-                "G": 1,
-                "O": 1,
-                "Q": 1,
-                "S": 1,
-                "X": 1,
-                "Z": 1,
-                "A": 2,
-                "J": 2,
-                "T": 2,
-                "V": 2,
-                "W": 2,
-                "Y": 2,
-                "notes": [
-                    "these are indices into one of the 'preceding' arrays"
-                ]
-            }
-        },
-        "numeralToNumeral": {
-            "preceding": {
-                "1": [1, 1, 2],
-                "2": [1, 2, 2],
-                "3": [1, 2, 2],
-                "4": [2, 2, 4],
-                "5": [1, 2, 2],
-                "6": [1, 2, 2],
-                "7": [2, 2, 4],
-                "8": [1, 2, 2],
-                "9": [1, 2, 2],
-                "0": [1, 2, 2]
-            },
-            "following": {
-                "1": 0,
-                "5": 0,
-                "2": 1,
-                "3": 1,
-                "6": 1,
-                "8": 1,
-                "9": 1,
-                "0": 1,
-                "4": 2,
-                "7": 2,
-                "notes": [
-                    "these are indices into one of the 'preceding' arrays"
-                ]
-            }
-        },
-        "spacing": {
+        "spacingsBySeries": {
             "Series A": [null, 1.1250, 0.90, 0.60, 0.30],
             "Series B": [null, 1.5000, 1.20, 0.80, 0.40],
             "Series C": [null, 1.6875, 1.35, 0.90, 0.45],
@@ -108,20 +15,14 @@
                 "p1": "HIJMNU1",
                 "p2": "BDGOPQRS2356890",
                 "p3": "CEFKXZ",
-                "p4": "ALTVWY47",
-                "": [
-                    "these relate to the right bearings"
-                ]
+                "p4": "ALTVWY47"
             },
             "following": {
                 "f1": "BDEFHIKLMNPRU15",
                 "f2": "CGOQSXZ236890",
-                "f3": "AJTVWY47",
-                "": [
-                    "these relate to the left bearings"
-                ]
+                "f3": "AJTVWY47"
             },
-            "pairs": {
+            "spacingIndexesByKerningClass": {
                 "p1f1": 1,
                 "p1f2": 1,
                 "p1f3": 2,
@@ -133,13 +34,10 @@
                 "p3f3": 3,
                 "p4f1": 2,
                 "p4f2": 2,
-                "p4f3": 4,
-                "notes": [
-                    "these are indexes into one of the spacing arrays"
-                ]
+                "p4f3": 4
             }
         },
-        "strokeWidth": {
+        "strokeWidthsBySeries": {
             "Series A": 0.7500,
             "Series B": 1.0000,
             "Series C": 1.1250,
