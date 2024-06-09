@@ -6,7 +6,7 @@ Signs_.
 
 Only the uppercase letters and digits were specified, so at present
 time only those are included.  Additional punctuation may be provided
-based on later specifications.
+based on later sources.
 
 Kerning pairs are based on the 1966 edition, which provided character
 spacing tables.
@@ -31,14 +31,14 @@ Currently available:
 -   [The 1952 edition][1952], to which is affixed some character
     spacing tables of uncertain origin.
 
--   The 1961 edition, which included character spacing tables.
-
+-   The 1961 edition, which eschewed exact dimensional drawings in
+    favor of large character forms and spacing tables.
+    
+# More Sources
 
 -   Forbes, Theodore W.; Moskowitz, Karl; and Morgan, Glen (1950).
     ["A Comparison of Lower Case and Capital Letters for Highway Signs"][forbes1950].
     _Proceedings of the Highway Research Board._ pp. 355–373.
-
-
 
 [current]: https://mutcd.fhwa.dot.gov/SHSe/Alphabets.pdf
 
