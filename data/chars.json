@@ -1,6 +1,8 @@
 {
     "metricsSource": "OC Highway VAR",
     "capHeightBasis": 670,
+    "overshoot": 0.015625,
+    "xHeight": 0.75,
     ".": {
         "lsb": [40, 45, 48, 50, 53, 55],
         "rsb": [40, 45, 48, 50, 53, 55],
