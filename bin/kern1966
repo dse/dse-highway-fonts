@@ -5,17 +5,25 @@ import fontforge
 import json
 import os
 
-# dataJson = open("data/data.json", "r").read()
-# data = (json.loads(dataJson))
 kernData = json.loads(open("data/1966.json", "r").read())
-kerningClassesDict = kernData["kerningClasses"]
-spacingIndexesByKerningClass = kerningClassesDict["spacingIndexesByKerningClass"]
-charStringsByPrecedingClass = kerningClassesDict["preceding"]
-charStringsByFollowingClass = kerningClassesDict["following"]
-unitBasis = kernData["unitBasis"]   # e.g., 8 (4 for year 2000 metrics)
-strokeWidths = kernData["strokeWidthsBySeries"]
-
 spaceWidthData = json.loads(open("data/spaces.json", "r").read())
+
+unitBasis = kernData["unitBasis"]   # e.g., 8 (4 for year 2000 metrics)
+kerningClassesData = kernData["kerningClasses"]
+spacingCodesByKerningClass = kerningClassesData["spacingCodesByKerningClass"]
+charStringsByPrecedingClass = kerningClassesData["preceding"]
+charStringsByFollowingClass = kerningClassesData["following"]
+strokeWidths = kernData["strokeWidthsBySeries"]
+precedingClassList = list([x for x in charStringsByPrecedingClass])
+followingClassList = list([x for x in charStringsByFollowingClass])
+precedingClassByChar = {}
+followingClassByChar = {}
+for pc in precedingClassList: # "p1", ...
+    for char in charStringsByPrecedingClass[pc]:
+        precedingClassByChar[char] = pc
+for fc in followingClassList: # "f1", ...
+    for char in charStringsByFollowingClass[fc]:
+        followingClassByChar[char] = fc
 spaceWidths = spaceWidthData["OC Highway VAR"]
 spaceWidthBasis = spaceWidthData["basis"]
 
@@ -23,15 +31,7 @@ def setKerningPairs(filename, seriesName):
     spacings = kernData["spacingsBySeries"][seriesName]
     font = fontforge.open(filename)
     unit = font.capHeight / unitBasis # e.g., 96 (font.capHeight = 768; unitBasis = 8)
-    strokeWidth = strokeWidths[seriesName] # e.g., 
-
-    try:
-        font.removeLookupSubtable("kern-1")
-    except OSError as e:
-        if str(e) == "No subtable named kern-1 exists":
-            pass
-        else:
-            raise
+    strokeWidth = strokeWidths[seriesName]
     try:
         font.removeLookup("kern")
     except OSError as e:
@@ -41,76 +41,92 @@ def setKerningPairs(filename, seriesName):
             raise
     font.addLookup("kern", "gpos_pair", None, (("kern", (("DFLT", ("dflt")),("latn", ("dflt")),)),))
 
-    precedingClassList = list([x for x in charStringsByPrecedingClass])
-    followingClassList = list([x for x in charStringsByFollowingClass])
+    print("stroke width = %f => %d" % (strokeWidth, int(round(unit * strokeWidth))))
 
-    precedingClassDict = {}
-    followingClassDict = {}
-    for precedingClass in precedingClassList: # "p1", ...
-        for char in charStringsByPrecedingClass[precedingClass]:
-            precedingClassDict[char] = precedingClass
-    for followingClass in followingClassList: # "f1", ...
-        for char in charStringsByFollowingClass[followingClass]:
-            followingClassDict[char] = followingClass
+    def setDefaultBearing():
+        char = "H"
+        pc = precedingClassByChar[char]
+        fc = followingClassByChar[char]
+        kc = pc + fc
+        sc = spacingCodesByKerningClass[kc]
+        spacing = spacings[sc]
+        bearing = spacing / 2
+        for char in font:
+            font[char].left_side_bearing = int(round(bearing * unit))
+            font[char].right_side_bearing = int(round(bearing * unit))
+        print("spacing of H-H is %f; default bearing = %f" % (spacing, bearing))
 
-    rightSideBearingsByPrecedingClass = {}
-    leftSideBearingsByFollowingClass = {}
+    def setSpaceWidth():
+        spaceWidth = int(round(spaceWidths[seriesName] / spaceWidthBasis * font.capHeight))
+        font[32].width = 0
+        font[32].left_side_bearing = 0
+        font[32].right_side_bearing = spaceWidth
+        print("width of space is %f => %d" % (spaceWidths[seriesName], font[32].right_side_bearing))
 
-    # default lsb/rsb, in case we forget to set those for any particular character, use H-H spacing.
-    hPrecedingClass = precedingClassDict["H"]
-    hFollowingClass = followingClassDict["H"]
-    bearing = int(round(unit * spacings[spacingIndexesByKerningClass[precedingClass + followingClass]] / 2))
-    for char in font:
-        font[char].left_side_bearing = bearing
-        font[char].right_side_bearing = bearing
+    setDefaultBearing()
+    setSpaceWidth()
 
-    # set width of space
-    font[32].width = 0
-    font[32].left_side_bearing = int(round(spaceWidths[seriesName] / spaceWidthBasis * font.capHeight))
-    font[32].right_side_bearing = int(round(spaceWidths[seriesName] / spaceWidthBasis * font.capHeight))
-
-    # set the right side bearing of all characters in a class.
-    def setRightSideBearings(precedingClass, followingClasses, using = None):
+    # Set the right side bearing of all characters in a preceding
+    # character class.  Value will be based on the average of spacings
+    # with characters in fcs.
+    def setRightSideBearings(pc, fcs):
+        print("setRightSideBearings(%s, %s)" % (pc, fcs))
         bearing = 0
-        for followingClass in followingClasses:
-            bearing += spacings[spacingIndexesByKerningClass[precedingClass + followingClass]]
-        bearing = bearing / len(followingClasses)
-        bearing = int(round(unit * bearing / 2))
-        for precedingChar in charStringsByPrecedingClass[precedingClass]:
-            font[ord(precedingChar)].right_side_bearing = bearing
-        rightSideBearingsByPrecedingClass[precedingClass] = bearing
+        for fc in fcs:
+            kc = pc + fc
+            spacingCode = spacingCodesByKerningClass[kc]
+            spacing = spacings[spacingCode]
+            print("    spacing of %s is %f" % (kc, spacing))
+            bearing += spacing / 2
+        bearing = bearing / len(fcs)
+        str = charStringsByPrecedingClass[pc]
+        print("    rsb of %s = %f => %d" % (str, bearing, round(int(bearing * unit))))
+        for char in str:
+            font[ord(char)].right_side_bearing = round(int(bearing * unit))
+        for fc in followingClassList:
+            rightSideBearingsByKerningClass[pc + fc] = bearing
 
-    # set the left side bearing of all characters in a class.
-    def setLeftSideBearings(followingClass, precedingClasses, using = None):
+    rightSideBearingsByKerningClass = {}
+    leftSideBearingsByKerningClass = {}
+
+    # Set the left side bearing of all characters in a following
+    # character class.  Value will be based on the average of spacings
+    # with characters in pcs.
+    def setLeftSideBearings(fc, pcs):
+        print("setLeftSideBearings(%s, %s)" % (fc, pcs))
         bearing = 0
-        if using is not None:
-            precedingClass = precedingClassDict[using]
-            followingClass = followingClassDict[using]
-            bearing += spacings[spacingIndexesByKerningClass[precedingClass + followingClass]]
-            bearing = bearing / len(precedingClasses)
-            bearing = int(round(unit * bearing / 2))
-        else:
-            for precedingClass in precedingClasses:
-                bearing += spacings[spacingIndexesByKerningClass[precedingClass + followingClass]]
-            bearing = bearing / len(precedingClasses)
-            bearing = int(round(unit * bearing / 2))
-        for followingChar in charStringsByFollowingClass[followingClass]:
-            font[ord(followingChar)].left_side_bearing = bearing
-        leftSideBearingsByFollowingClass[followingClass] = bearing
+        for pc in pcs:
+            kc = pc + fc
+            spacingCode = spacingCodesByKerningClass[kc]
+            spacing = spacings[spacingCode]
+            print("    spacing of %s is %f" % (kc, spacing))
+            bearing += spacing / 2
+        bearing = bearing / len(pcs)
+        str = charStringsByFollowingClass[fc]
+        print("    lsb of %s = %f => %d" % (str, bearing, round(int(bearing * unit))))
+        for char in str:
+            font[ord(char)].left_side_bearing = round(int(bearing * unit))
+        for pc in precedingClassList:
+            leftSideBearingsByKerningClass[pc + fc] = bearing
 
     # Set inital bearings.  You can use any values because we will use
     # kerning pairs to set the final inter-letter spacing.  The goals
     # are (1) as few kerning pairs as possible and (2) symmetric
-    # letters have the same left and right side bearings.
+    # letters have the same left and right side bearings.  Neither is
+    # absolutely necessary.
+    #
+    # Note: we CANNOT specify left and right side bearings on
+    # individual characters.  This would cause kerning pairs to be
+    # wonky if one of the characters has its "own" lsb or rsb.
     for setBearingsItem in kernData["setBearings"]:
         side = setBearingsItem["side"]
         left = setBearingsItem["left"]
         right = setBearingsItem["right"]
         if "using" in setBearingsItem:
             if side == "right":
-                setRightSideBearings(left, right, using=setBearingsItem["using"])
+                setRightSideBearings(left, right) # , using=setBearingsItem["using"])
             elif side == "left":
-                setLeftSideBearings(right, left, using=setBearingsItem["using"])
+                setLeftSideBearings(right, left) # , using=setBearingsItem["using"])
         else:
             if side == "right":
                 setRightSideBearings(left, right)
@@ -118,23 +134,27 @@ def setKerningPairs(filename, seriesName):
                 setLeftSideBearings(right, left)
 
     # kerning pairs
-    for precedingClass in precedingClassList:     # "p1", ...
-        for followingClass in followingClassList: # "f1", ...
-            kerningClass = precedingClass + followingClass # "p1f1", ..., but could be anything
-            spacingIndex = precedingClass + followingClass # "p1f1", ...
-            spacingCode = spacingIndexesByKerningClass[spacingIndex] # 1, 2, ...
-            spacing = int(round(spacings[spacingIndexesByKerningClass[precedingClass + followingClass]] * unit))
-            spacing = spacing - rightSideBearingsByPrecedingClass[precedingClass]
-            spacing = spacing - leftSideBearingsByFollowingClass[followingClass]
-            if spacing < -1 or spacing > 1: # fudge factor
-                precedingChars = list([x for x in charStringsByPrecedingClass[precedingClass]]) # ['0', ...]
-                followingChars = list([x for x in charStringsByFollowingClass[followingClass]])
-                precedingCharNames = tuple([font[ord(c)].glyphname for c in precedingChars]) # ("zero", ...)
-                followingCharNames = tuple([font[ord(c)].glyphname for c in followingChars])
-                precedingTuple = (None, precedingCharNames) # seems like a bug that I have to prepend None.
-                followingTuple = (None, followingCharNames) # ditto.
-                spacingTuple = tuple([spacing] * len(precedingTuple) * len(followingTuple))
-                font.addKerningClass("kern", kerningClass, precedingTuple, followingTuple, spacingTuple)
+    for pc in precedingClassList:     # "p1", ...
+        for fc in followingClassList: # "f1", ...
+            kc = pc + fc # "p1f1", ..., but could be anything
+            print("kerning pair %s" % kc)
+            spacingCode = spacingCodesByKerningClass[kc] # 1, 2, ...
+            spacing = spacings[spacingCode]
+            print("    inter-letter spacing = %f => %d" % (spacing, int(round(spacing * unit))))
+            rsb = rightSideBearingsByKerningClass[kc]
+            lsb = leftSideBearingsByKerningClass[kc]
+            spacing = spacing - rsb - lsb
+            spacingByUnit = int(round(spacing * unit))
+            print("        rsb = %f; lsb = %f; kp adds spacing = %f => %d" % (rsb, lsb, spacing, spacingByUnit))
+            if True: # spacingByUnit < -1 or spacingByUnit > 1: # fudge factor
+                pcs = list(charStringsByPrecedingClass[pc])
+                fcs = list(charStringsByFollowingClass[fc])
+                precedingGlyphNames = tuple([font[ord(c)].glyphname for c in pcs]) # ("zero", ...)
+                followingGlyphNames = tuple([font[ord(c)].glyphname for c in fcs])
+                precedingTuple = (None, precedingGlyphNames) # Prepending None is a workaround
+                followingTuple = (None, followingGlyphNames) # for a bug.
+                spacingTuple = tuple([spacingByUnit] * len(precedingTuple) * len(followingTuple))
+                font.addKerningClass("kern", kc, precedingTuple, followingTuple, spacingTuple)
     if os.path.splitext(filename)[1] == ".sfd":
         font.save(filename)
     else:
@@ -142,5 +162,3 @@ def setKerningPairs(filename, seriesName):
 
 setKerningPairs("src/series-a.sfd", "Series A")
 setKerningPairs("src/series-b.sfd", "Series B")
-
-# feature-script-lang tuple
