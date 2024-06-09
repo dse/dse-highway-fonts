@@ -40,9 +40,6 @@ def setKerningPairs(filename, seriesName):
         else:
             raise
     font.addLookup("kern", "gpos_pair", None, (("kern", (("DFLT", ("dflt")),("latn", ("dflt")),)),))
-
-    print("stroke width = %f => %d" % (strokeWidth, int(round(unit * strokeWidth))))
-
     def setDefaultBearing():
         char = "H"
         pc = precedingClassByChar[char]
@@ -54,15 +51,11 @@ def setKerningPairs(filename, seriesName):
         for char in font:
             font[char].left_side_bearing = int(round(bearing * unit))
             font[char].right_side_bearing = int(round(bearing * unit))
-        print("spacing of H-H is %f; default bearing = %f" % (spacing, bearing))
-
     def setSpaceWidth():
         spaceWidth = int(round(spaceWidths[seriesName] / spaceWidthBasis * font.capHeight))
         font[32].width = 0
         font[32].left_side_bearing = 0
         font[32].right_side_bearing = spaceWidth
-        print("width of space is %f => %d" % (spaceWidths[seriesName], font[32].right_side_bearing))
-
     setDefaultBearing()
     setSpaceWidth()
 
@@ -70,17 +63,14 @@ def setKerningPairs(filename, seriesName):
     # character class.  Value will be based on the average of spacings
     # with characters in fcs.
     def setRightSideBearings(pc, fcs):
-        print("setRightSideBearings(%s, %s)" % (pc, fcs))
         bearing = 0
         for fc in fcs:
             kc = pc + fc
             spacingCode = spacingCodesByKerningClass[kc]
             spacing = spacings[spacingCode]
-            print("    spacing of %s is %f" % (kc, spacing))
             bearing += spacing / 2
         bearing = bearing / len(fcs)
         str = charStringsByPrecedingClass[pc]
-        print("    rsb of %s = %f => %d" % (str, bearing, round(int(bearing * unit))))
         for char in str:
             font[ord(char)].right_side_bearing = round(int(bearing * unit))
         for fc in followingClassList:
@@ -93,17 +83,14 @@ def setKerningPairs(filename, seriesName):
     # character class.  Value will be based on the average of spacings
     # with characters in pcs.
     def setLeftSideBearings(fc, pcs):
-        print("setLeftSideBearings(%s, %s)" % (fc, pcs))
         bearing = 0
         for pc in pcs:
             kc = pc + fc
             spacingCode = spacingCodesByKerningClass[kc]
             spacing = spacings[spacingCode]
-            print("    spacing of %s is %f" % (kc, spacing))
             bearing += spacing / 2
         bearing = bearing / len(pcs)
         str = charStringsByFollowingClass[fc]
-        print("    lsb of %s = %f => %d" % (str, bearing, round(int(bearing * unit))))
         for char in str:
             font[ord(char)].left_side_bearing = round(int(bearing * unit))
         for pc in precedingClassList:
@@ -137,15 +124,12 @@ def setKerningPairs(filename, seriesName):
     for pc in precedingClassList:     # "p1", ...
         for fc in followingClassList: # "f1", ...
             kc = pc + fc # "p1f1", ..., but could be anything
-            print("kerning pair %s" % kc)
             spacingCode = spacingCodesByKerningClass[kc] # 1, 2, ...
             spacing = spacings[spacingCode]
-            print("    inter-letter spacing = %f => %d" % (spacing, int(round(spacing * unit))))
             rsb = rightSideBearingsByKerningClass[kc]
             lsb = leftSideBearingsByKerningClass[kc]
             spacing = spacing - rsb - lsb
             spacingByUnit = int(round(spacing * unit))
-            print("        rsb = %f; lsb = %f; kp adds spacing = %f => %d" % (rsb, lsb, spacing, spacingByUnit))
             if True: # spacingByUnit < -1 or spacingByUnit > 1: # fudge factor
                 pcs = list(charStringsByPrecedingClass[pc])
                 fcs = list(charStringsByFollowingClass[fc])
