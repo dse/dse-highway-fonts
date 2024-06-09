@@ -98,16 +98,19 @@ def setKerningPairs(filename, seriesName):
             font[ord(followingChar)].left_side_bearing = bearing
         leftSideBearingsByFollowingClass[followingClass] = bearing
 
-    # set inital bearings
+    # Set inital bearings.  You can use any values because we will use
+    # kerning pairs to set the final inter-letter spacing.  The goals
+    # are (1) as few kerning pairs as possible and (2) symmetric
+    # letters have the same left and right side bearings.
     for setBearingsItem in kernData["setBearings"]:
         side = setBearingsItem["side"]
         left = setBearingsItem["left"]
         right = setBearingsItem["right"]
         if "using" in setBearingsItem:
             if side == "right":
-                setRightSideBearings(left, right)
+                setRightSideBearings(left, right, using=setBearingsItem["using"])
             elif side == "left":
-                setLeftSideBearings(right, left)
+                setLeftSideBearings(right, left, using=setBearingsItem["using"])
         else:
             if side == "right":
                 setRightSideBearings(left, right)
