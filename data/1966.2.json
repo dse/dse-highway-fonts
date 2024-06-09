@@ -1,0 +1,75 @@
+{
+    "unitBasis": 8,
+    "spacingsBySeries": {
+        "Series A": [null, 1.1250, 0.90, 0.60, 0.30, 0.00],
+        "Series B": [null, 1.5000, 1.20, 0.80, 0.40, 0.00],
+        "Series C": [null, 1.6875, 1.35, 0.90, 0.45, 0.00],
+        "Series D": [null, 1.8750, 1.50, 1.00, 0.50, 0.00],
+        "Series E": [null, 2.0625, 1.65, 1.10, 0.55, 0.00],
+        "Series F": [null, 2.2500, 1.80, 1.20, 0.60, 0.00]
+    },
+    "kerningClasses": {
+        "preceding": {
+            "p1": "HIJMNU1",
+            "p2": "BDGOQRS2356890",
+            "p3": "CEKXZ4",
+            "p4": "FTVWY7P",
+            "p5": "AL"
+        },
+        "following": {
+            "f1": "BDEFHIKLMNPRU5",
+            "f2": "CGOQS1236890",
+            "f3": "XZ",
+            "f4": "TVWY7",
+            "f5": "AJ4"
+        },
+        "spacingIndexesByKerningClass": {
+            "p1f1": 1,
+            "p1f2": 1,
+            "p1f3": 2,
+            "p1f4": 2,
+            "p1f5": 2,
+            "p2f1": 1,
+            "p2f2": 2,
+            "p2f3": 2,
+            "p2f4": 2,
+            "p2f5": 2,
+            "p3f1": 2,
+            "p3f2": 2,
+            "p3f3": 2,
+            "p3f4": 3,
+            "p3f5": 3,
+            "p4f1": 2,
+            "p4f2": 2,
+            "p4f3": 3,
+            "p4f4": 3,
+            "p4f5": 4,
+            "p5f1": 2,
+            "p5f2": 2,
+            "p5f3": 3,
+            "p5f4": 4,
+            "p5f5": 3
+        }
+    },
+    "setBearings": [
+        { "side": "right", "left": "p1", "right": ["f1"] },
+        { "side": "right", "left": "p2", "right": ["f2"] },
+        { "side": "right", "left": "p3", "right": ["f3"] },
+        { "side": "right", "left": "p4", "right": ["f4"] },
+        { "side": "right", "left": "p5", "right": ["f5"] },
+        { "side": "left", "left": ["p1"], "right": "f1" },
+        { "side": "left", "left": ["p2"], "right": "f2" },
+        { "side": "left", "left": ["p3"], "right": "f3" },
+        { "side": "left", "left": ["p4"], "right": "f4" },
+        { "side": "left", "left": ["p5"], "right": "f5" }
+    ],
+    "strokeWidthsBySeries": {
+        "Series A": 0.7500,
+        "Series B": 1.0000,
+        "Series C": 1.1250,
+        "Series D": 1.2500,
+        "Series E": 1.3750,
+        "Series E (Modified)": 1.6000,
+        "Series F": 1.5000
+    }
+}
