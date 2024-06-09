@@ -2,7 +2,8 @@
 
 An effort to create fonts based on the **original FHWA 1945
 dimensional drawings** for their _Standard Alphabets for Highway
-Signs_.
+Signs_.  Later versions of these Highway Gothic fonts were tweaked to
+clean up some of the quirks.
 
 Only the uppercase letters and digits were specified, so at present
 time only those are included.  Additional punctuation may be provided
@@ -28,17 +29,21 @@ Currently available:
 
 -   [The original 1945 edition][1945].
 
--   [The 1952 edition][1952], to which is affixed some character
-    spacing tables of uncertain origin.
-
--   The 1961 edition, which eschewed exact dimensional drawings in
-    favor of large character forms and spacing tables.
+-   [The 1966 edition][1966], which eschewed exact dimensional
+    drawings in favor of large character forms and spacing tables.
     
 # More Sources
+
+-   [The 1952 edition][1952], to this copy of which is also included
+    some modified character spacing tables of uncertain origin.
 
 -   Forbes, Theodore W.; Moskowitz, Karl; and Morgan, Glen (1950).
     ["A Comparison of Lower Case and Capital Letters for Highway Signs"][forbes1950].
     _Proceedings of the Highway Research Board._ pp. 355–373.
+
+-   [The 1977 metric edition][1977].
+
+-   [The current edition][current].
 
 [current]: https://mutcd.fhwa.dot.gov/SHSe/Alphabets.pdf
 
