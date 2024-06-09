@@ -45,17 +45,14 @@ def setKerningPairs(filename, seriesName):
         pc = precedingClassByChar[char]
         fc = followingClassByChar[char]
         kc = pc + fc
-        sc = spacingCodesByKerningClass[kc]
-        spacing = spacings[sc]
-        bearing = spacing / 2
+        bearing = spacings[spacingCodesByKerningClass[kc]] / 2
         for char in font:
             font[char].left_side_bearing = int(round(bearing * unit))
             font[char].right_side_bearing = int(round(bearing * unit))
     def setSpaceWidth():
-        spaceWidth = int(round(spaceWidths[seriesName] / spaceWidthBasis * font.capHeight))
         font[32].width = 0
         font[32].left_side_bearing = 0
-        font[32].right_side_bearing = spaceWidth
+        font[32].right_side_bearing = int(round(spaceWidths[seriesName] / spaceWidthBasis * font.capHeight))
     setDefaultBearing()
     setSpaceWidth()
 
@@ -65,10 +62,7 @@ def setKerningPairs(filename, seriesName):
     def setRightSideBearings(pc, fcs):
         bearing = 0
         for fc in fcs:
-            kc = pc + fc
-            spacingCode = spacingCodesByKerningClass[kc]
-            spacing = spacings[spacingCode]
-            bearing += spacing / 2
+            bearing += spacings[spacingCodesByKerningClass[pc + fc]] / 2
         bearing = bearing / len(fcs)
         str = charStringsByPrecedingClass[pc]
         for char in str:
@@ -85,10 +79,7 @@ def setKerningPairs(filename, seriesName):
     def setLeftSideBearings(fc, pcs):
         bearing = 0
         for pc in pcs:
-            kc = pc + fc
-            spacingCode = spacingCodesByKerningClass[kc]
-            spacing = spacings[spacingCode]
-            bearing += spacing / 2
+            bearing += spacings[spacingCodesByKerningClass[pc + fc]] / 2
         bearing = bearing / len(pcs)
         str = charStringsByFollowingClass[fc]
         for char in str:
@@ -109,35 +100,28 @@ def setKerningPairs(filename, seriesName):
         side = setBearingsItem["side"]
         left = setBearingsItem["left"]
         right = setBearingsItem["right"]
-        if "using" in setBearingsItem:
-            if side == "right":
-                setRightSideBearings(left, right) # , using=setBearingsItem["using"])
-            elif side == "left":
-                setLeftSideBearings(right, left) # , using=setBearingsItem["using"])
-        else:
-            if side == "right":
-                setRightSideBearings(left, right)
-            elif side == "left":
-                setLeftSideBearings(right, left)
+        if side == "right":
+            setRightSideBearings(left, right)
+        elif side == "left":
+            setLeftSideBearings(right, left)
 
     # kerning pairs
     for pc in precedingClassList:     # "p1", ...
         for fc in followingClassList: # "f1", ...
             kc = pc + fc # "p1f1", ..., but could be anything
-            spacingCode = spacingCodesByKerningClass[kc] # 1, 2, ...
-            spacing = spacings[spacingCode]
+            spacing = spacings[spacingCodesByKerningClass[kc]]
             rsb = rightSideBearingsByKerningClass[kc]
             lsb = leftSideBearingsByKerningClass[kc]
             spacing = spacing - rsb - lsb
             spacingByUnit = int(round(spacing * unit))
-            if True: # spacingByUnit < -1 or spacingByUnit > 1: # fudge factor
+            if True: # must add all kerning pairs otherwise things get wonky
                 pcs = list(charStringsByPrecedingClass[pc])
                 fcs = list(charStringsByFollowingClass[fc])
                 precedingGlyphNames = tuple([font[ord(c)].glyphname for c in pcs]) # ("zero", ...)
                 followingGlyphNames = tuple([font[ord(c)].glyphname for c in fcs])
                 precedingTuple = (None, precedingGlyphNames) # Prepending None is a workaround
                 followingTuple = (None, followingGlyphNames) # for a bug.
-                spacingTuple = tuple([spacingByUnit] * len(precedingTuple) * len(followingTuple))
+                spacingTuple = tuple([int(round(spacing * unit))] * len(precedingTuple) * len(followingTuple))
                 font.addKerningClass("kern", kc, precedingTuple, followingTuple, spacingTuple)
     if os.path.splitext(filename)[1] == ".sfd":
         font.save(filename)
