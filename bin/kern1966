@@ -6,25 +6,29 @@ import json
 import os
 
 dataJson = open("data/data.json", "r").read()
-data = json.loads(dataJson)
-data1966 = data["1966"]
-kerningClasses = data1966["kerningClasses"]
-preceding = kerningClasses["preceding"]
-following = kerningClasses["following"]
-pairIndexes = kerningClasses["pairs"]
+data = (json.loads(dataJson))
+data1966 = data["1966take2"]
+kerningClassesDict = data1966["kerningClasses"]
+spacingIndexesByKerningClass = kerningClassesDict["spacingIndexesByKerningClass"]
+charStringsByPrecedingClass = kerningClassesDict["preceding"]
+charStringsByFollowingClass = kerningClassesDict["following"]
 unitBasis = data1966["unitBasis"]   # e.g., 8 (4 for year 2000 metrics)
-strokeWidths = data1966["strokeWidth"]
+strokeWidths = data1966["strokeWidthsBySeries"]
 spaceWidths = data["spaceWidth"]["OC Highway VAR"]
 spaceWidthBasis = data["spaceWidth"]["basis"]
 
 def setKerningPairs(filename, seriesName):
-    spacings = data1966["spacing"][seriesName]
+    spacings = data1966["spacingsBySeries"][seriesName]
+    print(repr(spacings))
     font = fontforge.open(filename)
-    unit = font.capHeight / unitBasis
-    strokeWidth = strokeWidths[seriesName] # e.g., 0.75
+    unit = font.capHeight / unitBasis # e.g., 96 (font.capHeight = 768; unitBasis = 8)
+    strokeWidth = strokeWidths[seriesName] # e.g., 
+
+    # default lsb/rsb
     for char in font:
-        font[char].left_side_bearing = int(round(strokeWidth * 0.75))
-        font[char].right_side_bearing = int(round(strokeWidth * 0.75))
+        font[char].left_side_bearing = int(round(unit * strokeWidth * 0.75))
+        font[char].right_side_bearing = int(round(unit * strokeWidth * 0.75))
+
     try:
         font.removeLookupSubtable("kern-1")
     except OSError as e:
@@ -43,28 +47,96 @@ def setKerningPairs(filename, seriesName):
 
     # set width of space
     font[32].width = 0
-    font[32].left_side_bearing = int(0)
+    font[32].left_side_bearing = int(round(spaceWidths[seriesName] / spaceWidthBasis * font.capHeight))
     font[32].right_side_bearing = int(round(spaceWidths[seriesName] / spaceWidthBasis * font.capHeight))
+    print("space width = %d" % (font[32].width + font[32].left_side_bearing + font[32].right_side_bearing,))
 
-    precedingDict = kerningClasses["preceding"]
-    followingDict = kerningClasses["following"]
-    precedingClassNames = list(filter(lambda x: x != "", [x for x in precedingDict]))
-    followingClassNames = list(filter(lambda x: x != "", [x for x in followingDict]))
+    precedingClassList = list([x for x in charStringsByPrecedingClass])
+    followingClassList = list([x for x in charStringsByFollowingClass])
 
-    for precedingClass in precedingClassNames: # "p1", ...
-        for followingClass in followingClassNames: # "f1", ...
-            kerningClassName = precedingClass + followingClass
+    print("precedingClassList = %s" % repr(precedingClassList))
+    print("followingClassList = %s" % repr(followingClassList))
+
+    precedingClassDict = {}
+    followingClassDict = {}
+    for precedingClass in precedingClassList: # "p1", ...
+        for char in charStringsByPrecedingClass[precedingClass]:
+            precedingClassDict[char] = precedingClass
+    for followingClass in followingClassList: # "f1", ...
+        for char in charStringsByFollowingClass[followingClass]:
+            followingClassDict[char] = followingClass
+
+    print("precedingClassDict = %s" % repr(precedingClassDict))
+    print("followingClassDict = %s" % repr(followingClassDict))
+
+    rightSideBearingsByPrecedingClass = {}
+    leftSideBearingsByFollowingClass = {}
+
+    # set the right side bearing of all characters in a class.
+    def setRightSideBearings(precedingClass, followingClasses):
+        print("setting rsb of characters in %s based on lsbs of %s" % (repr(precedingClass), repr(followingClasses)))
+        bearing = 0
+        for followingClass in followingClasses:
+            bearing += spacings[spacingIndexesByKerningClass[precedingClass + followingClass]]
+            print("    spacing between %s and %s is %d" % (precedingClass, followingClass, unit / 2 * spacings[spacingIndexesByKerningClass[precedingClass + followingClass]]))
+        bearing = bearing / len(followingClasses)
+        bearing = int(round(unit * bearing / 2))
+        for precedingChar in charStringsByPrecedingClass[precedingClass]:
+            print("    rsb of %s is %d" % (precedingChar, bearing))
+            font[ord(precedingChar)].right_side_bearing = bearing
+        rightSideBearingsByPrecedingClass[precedingClass] = bearing
+        print("lsb of preceding class %s is %d" % (precedingClass, bearing))
+
+    # set the left side bearing of all characters in a class.
+    def setLeftSideBearings(followingClass, precedingClasses):
+        print("setting lsb of characters in %s based on rsbs of %s" % (repr(followingClass), repr(precedingClasses)))
+        bearing = 0
+        for precedingClass in precedingClasses:
+            bearing += spacings[spacingIndexesByKerningClass[precedingClass + followingClass]]
+            print("    spacing between %s and %s is %d" % (precedingClass, followingClass, unit / 2 * spacings[spacingIndexesByKerningClass[precedingClass + followingClass]]))
+        bearing = bearing / len(precedingClasses)
+        bearing = int(round(unit * bearing / 2))
+        for followingChar in charStringsByFollowingClass[followingClass]:
+            print("    lsb of %s is %d" % (followingChar, bearing))
+            font[ord(followingChar)].left_side_bearing = bearing
+        leftSideBearingsByFollowingClass[followingClass] = bearing
+        print("lsb of following class %s is %d" % (followingClass, bearing))
+
+    setRightSideBearings("p1", ["f1"])
+    setRightSideBearings("p2", ["f2"])
+    setRightSideBearings("p3", ["f4"])
+    setRightSideBearings("p4", ["f4"])
+    # setRightSideBearings("p5", ["f5"])
+    setLeftSideBearings("f1", ["p1"])
+    setLeftSideBearings("f2", ["p2"])
+    setLeftSideBearings("f3", ["p3"])
+    setLeftSideBearings("f4", ["p4"])
+    # setLeftSideBearings("f5", ["p5"])
+
+    for precedingClass in precedingClassList:     # "p1", ...
+        for followingClass in followingClassList: # "f1", ...
+            print("setting kerning pair %s%s" % (precedingClass, followingClass))
+            kerningClass = precedingClass + followingClass # "p1f1", ..., but could be anything
             spacingIndex = precedingClass + followingClass # "p1f1", ...
-            spacingCode = pairIndexes[spacingIndex]        # 1, 2, ...
-            spacing = int(round(unit * spacings[spacingCode]))
-            precedingChars = list([x for x in precedingDict[precedingClass]]) # ['0', ...]
-            followingChars = list([x for x in followingDict[followingClass]])
+            print("    spacing index %s" % spacingIndex)
+            spacingCode = spacingIndexesByKerningClass[spacingIndex] # 1, 2, ...
+            print("    spacing code %s" % spacingCode)
+
+            spacing = int(round(spacings[spacingIndexesByKerningClass[precedingClass + followingClass]] * unit))
+            spacing = spacing - rightSideBearingsByPrecedingClass[precedingClass]
+            spacing = spacing - leftSideBearingsByFollowingClass[followingClass]
+
+            precedingChars = list([x for x in charStringsByPrecedingClass[precedingClass]]) # ['0', ...]
+            followingChars = list([x for x in charStringsByFollowingClass[followingClass]])
+            print("    preceding characters are %s" % repr(precedingChars))
+            print("    following characters are %s" % repr(followingChars))
+            print("    spacing is %d" % spacing)
             precedingCharNames = tuple([font[ord(c)].glyphname for c in precedingChars]) # ("zero", ...)
             followingCharNames = tuple([font[ord(c)].glyphname for c in followingChars])
             precedingTuple = (None, precedingCharNames) # seems like a bug that I have to prepend None.
             followingTuple = (None, followingCharNames) # ditto.
             spacingTuple = tuple([spacing] * len(precedingTuple) * len(followingTuple))
-            font.addKerningClass("kern", kerningClassName, precedingTuple, followingTuple, spacingTuple)
+            font.addKerningClass("kern", kerningClass, precedingTuple, followingTuple, spacingTuple)
     if os.path.splitext(filename)[1] == ".sfd":
         font.save(filename)
     else:
