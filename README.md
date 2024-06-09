@@ -34,6 +34,15 @@ Currently available:
     
 # More Sources
 
+-   [Fog City Gothic][fogcity], the good old San Francisco street name
+    sign font, based on the original US road sign font.
+
+    Along with the United States Highway System of 1926 came the 1927
+    _Manual and Specifications for the Manufacture, Display, and
+    Erection of U. S. Standard Road Markers and Signs_, which included
+    Highway Gothic's predecessor, the original standarized road sign
+    font---a blocky, poorly legible affair.
+
 -   [The 1952 edition][1952], to this copy of which is also included
     some modified character spacing tables of uncertain origin.
 
