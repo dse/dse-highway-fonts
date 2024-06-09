@@ -106,12 +106,12 @@ def setKerningPairs(filename, seriesName):
     setRightSideBearings("p2", ["f2"])
     setRightSideBearings("p3", ["f4"])
     setRightSideBearings("p4", ["f4"])
-    # setRightSideBearings("p5", ["f5"])
+    setRightSideBearings("p5", ["f5"])
     setLeftSideBearings("f1", ["p1"])
     setLeftSideBearings("f2", ["p2"])
     setLeftSideBearings("f3", ["p3"])
     setLeftSideBearings("f4", ["p4"])
-    # setLeftSideBearings("f5", ["p5"])
+    setLeftSideBearings("f5", ["p5"])
 
     for precedingClass in precedingClassList:     # "p1", ...
         for followingClass in followingClassList: # "f1", ...
