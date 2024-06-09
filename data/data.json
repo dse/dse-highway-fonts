@@ -61,32 +61,43 @@
             "preceding": {
                 "p1": "HIJMNU1",
                 "p2": "BDGOPQRS2356890",
-                "p3": "CEFKXZ",
-                "p4": "ALTVWY47"
+                "p3": "CEKXZ4",
+                "p4": "FTVWY7",
+                "p5": "AL"
             },
             "following": {
-                "f1": "BDEFHIKLMNPRU15",
-                "f2": "CGOQS236890",
+                "f1": "BDEFHIKLMNPRU5",
+                "f2": "CGOQS1236890",
                 "f3": "XZ",
-                "f4": "AJTVWY47"
+                "f4": "TVWY7",
+                "f5": "AJ4"
             },
             "spacingIndexesByKerningClass": {
                 "p1f1": 1,
                 "p1f2": 1,
                 "p1f3": 2,
                 "p1f4": 2,
+                "p1f5": 2,
                 "p2f1": 1,
                 "p2f2": 2,
                 "p2f3": 2,
                 "p2f4": 2,
+                "p2f5": 2,
                 "p3f1": 2,
                 "p3f2": 2,
                 "p3f3": 2,
                 "p3f4": 3,
+                "p3f5": 3,
                 "p4f1": 2,
                 "p4f2": 2,
                 "p4f3": 3,
-                "p4f4": 4
+                "p4f4": 3,
+                "p4f5": 4,
+                "p5f1": 2,
+                "p5f2": 2,
+                "p5f3": 3,
+                "p5f4": 4,
+                "p5f5": 3
             }
         },
         "strokeWidthsBySeries": {
