@@ -47,6 +47,53 @@
             "Series F": 1.5000
         }
     },
+    "1966take2": {
+        "unitBasis": 8,
+        "spacingsBySeries": {
+            "Series A": [null, 1.1250, 0.90, 0.60, 0.30],
+            "Series B": [null, 1.5000, 1.20, 0.80, 0.40],
+            "Series C": [null, 1.6875, 1.35, 0.90, 0.45],
+            "Series D": [null, 1.8750, 1.50, 1.00, 0.50],
+            "Series E": [null, 2.0625, 1.65, 1.10, 0.55],
+            "Series F": [null, 2.2500, 1.80, 1.20, 0.60]
+        },
+        "kerningClasses": {
+            "preceding": {
+                "p1": "HIJMNU1",
+                "p2": "BDGOPQRS2356890",
+                "p3": "CEFKXZ",
+                "p4": "ALTVWY47"
+            },
+            "following": {
+                "f1": "BDEFHIKLMNPRU15",
+                "f2": "CGOQSXZ236890",
+                "f3": "AJTVWY47"
+            },
+            "spacingIndexesByKerningClass": {
+                "p1f1": 1,
+                "p1f2": 1,
+                "p1f3": 2,
+                "p2f1": 1,
+                "p2f2": 2,
+                "p2f3": 2,
+                "p3f1": 2,
+                "p3f2": 2,
+                "p3f3": 3,
+                "p4f1": 2,
+                "p4f2": 2,
+                "p4f3": 4
+            }
+        },
+        "strokeWidthsBySeries": {
+            "Series A": 0.7500,
+            "Series B": 1.0000,
+            "Series C": 1.1250,
+            "Series D": 1.2500,
+            "Series E": 1.3750,
+            "Series E (Modified)": 1.6000,
+            "Series F": 1.5000
+        }
+    },
     "2000": {
         "unitBasis": 4,
         "metrics": {
