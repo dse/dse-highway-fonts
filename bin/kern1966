@@ -8,7 +8,7 @@ import os
 kernData = json.loads(open("data/1966.json", "r").read())
 spaceWidthData = json.loads(open("data/spaces.json", "r").read())
 
-unitBasis = kernData["unitBasis"]   # e.g., 8 (4 for year 2000 metrics)
+unitBasis = kernData["unitBasis"] if "unitBasis" in kernData else 1
 kerningClassesData = kernData["kerningClasses"]
 spacingCodesByKerningClass = kerningClassesData["spacingCodesByKerningClass"]
 charStringsByPrecedingClass = kerningClassesData["preceding"]
