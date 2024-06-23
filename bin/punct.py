@@ -10,23 +10,36 @@ metricsByChar = metricsData["chars"]
 seriesIdxMap = metricsData["seriesIdxMap"]
 metricsCapHeightBasis = metricsData["capHeightBasis"]
 
+metrics2000Data = json.loads(open("data/2000.json", "r").read())
+unitBasis2000 = metrics2000Data["unitBasis"] if "unitBasis" in metrics2000Data else 1
+
 def main():
     setPunctMetrics("src/series-a.sfd", "Series A")
     setPunctMetrics("src/series-b.sfd", "Series B")
 
 def setPunctMetrics(filename, seriesName):
+    metrics2000 = None
+    if seriesName in  metrics2000Data["metrics"]:
+        metrics2000 = metrics2000Data["metrics"][seriesName]
     seriesIdx = seriesIdxMap[seriesName]
     print(seriesIdx)
     font = fontforge.open(filename)
-    font.layers.add("defh", True, True)
+    if not "defh" in font.layers:
+        font.layers.add("defh", True, True)
     for char in metricsByChar:
         metrics = metricsByChar[char]
         codepoint = ord(char)
         glyph = font.createChar(codepoint)
         factor = font.capHeight / metricsCapHeightBasis
+        if True and metrics2000 is not None:
+            factor = font.capHeight / unitBasis2000
         lsb = metrics["lsb"]
         rsb = metrics["rsb"]
         width = metrics["width"]
+        if True and metrics2000 is not None:
+            lsb = metrics2000[char][0]
+            rsb = metrics2000[char][2]
+            width = metrics2000[char][1]
         print("%s: lsb = %s; width = %s; rsb = %s" % (repr(char), repr(lsb), repr(width), repr(rsb)))
         if type(lsb) is list:
             lsb = 0 if len(lsb) <= seriesIdx else lsb[seriesIdx]
