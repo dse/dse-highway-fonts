@@ -3,9 +3,9 @@
 These are _Standard Alphabets for Highway Signs_, painstakingly
 constructed from the original 1945 dimensional drawings.
 
-![dimensional drawings][images/letters.png]
+![dimensional drawings](images/letters.png)
 
-![dimensions][images/dimensions.png]
+![dimensions](images/dimensions.png)
 
 Later versions of the alphabets adulterated the original fonts by
 "cleaning up" some of the curves.  These are not modified in that
