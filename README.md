@@ -1,24 +1,31 @@
 # dse-highway-fonts
 
-An effort to create fonts based on the **original FHWA 1945
-dimensional drawings** for their _Standard Alphabets for Highway
-Signs_.  Later versions of these Highway Gothic fonts were tweaked to
-clean up some of the quirks.
+These are _Standard Alphabets for Highway Signs_, painstakingly
+constructed from the original 1945 dimensional drawings.
 
-Only the uppercase letters and digits were specified, so at present
-time only those are included.  Additional punctuation may be provided
-based on later sources.
+![dimensional drawings][images/letters.png]
 
-Kerning pairs are based on the 1966 edition, which provided character
-spacing tables.
+![dimensions][images/dimensions.png]
+
+Later versions of the alphabets adulterated the original fonts by
+"cleaning up" some of the curves.  These are not modified in that
+manner.
+
+You only get the uppercase letters and digits, since only those were
+provided in the original drawings.  Some additional punctuation may be
+added later.
+
+Kerning pairs are based on the 1966 edition of the document, which
+provided character spacing tables (and omitted the dimensional
+drawings in favor of 2-inch-high exact lettforms).
 
 Currently available:
 
 -   Series A, an ultra-compressed variant that is no longer in use in
     the United States, but was one of the original variants from 1945.
     
-    **Series A was deprecated by the Federal Highway Administration.
-    Do not use Series A for actual highway signs.**
+    **Series A was deprecated by the Federal Highway Administration in
+    the 1960s.  Do not use Series A for actual highway signs.**
     
     Apparently it is still used in some places in Australia.
 
@@ -29,10 +36,10 @@ Currently available:
 
 -   [The original 1945 edition][1945].
 
--   [The 1966 edition][1966], which eschewed exact dimensional
-    drawings in favor of large character forms and spacing tables.
+-   [The 1966 edition][1966], which omitted exact dimensional drawings
+    in favor of large character forms, and added spacing tables.
     
-# More Sources
+# More Stuff
 
 -   [Fog City Gothic][fogcity], the good old San Francisco street name
     sign font, based on the original US road sign font.
