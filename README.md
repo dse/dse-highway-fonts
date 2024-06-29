@@ -73,6 +73,8 @@ Currently available:
 
 [1952]: https://books.google.com/books/about/Standard_Alphabets_for_Highway_Signs.html?id=mHksAQAAMAAJ
 
+[fogcity]: https://www.fogcitygothic.com
+
 <!-- [2004]: https://mutcd.fhwa.dot.gov/ser-shs_millennium_eng.htm -->
 
 <!-- [2009]: https://mutcd.fhwa.dot.gov/kno_2009r1r2.htm -->
