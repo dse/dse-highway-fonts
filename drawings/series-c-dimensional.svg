@@ -24,12 +24,12 @@
      inkscape:pagecheckerboard="false"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="in"
-     showgrid="false"
+     showgrid="true"
      showborder="false"
      labelstyle="default"
      inkscape:zoom="1"
-     inkscape:cx="18319.5"
-     inkscape:cy="154.5"
+     inkscape:cx="18328.5"
+     inkscape:cy="368.5"
      inkscape:window-width="1920"
      inkscape:window-height="1027"
      inkscape:window-x="2248"
@@ -52,7 +52,7 @@
        dotted="false"
        gridanglex="30"
        gridanglez="30"
-       visible="false" />
+       visible="true" />
     <inkscape:grid
        id="grid2"
        units="in"
@@ -68,7 +68,7 @@
        dotted="true"
        gridanglex="30"
        gridanglez="30"
-       visible="false" />
+       visible="true" />
     <sodipodi:guide
        position="-25.4,206.375"
        orientation="0,-1"
@@ -2172,7 +2172,7 @@
        id="circle284-8"
        cx="4089.3999"
        cy="133.35001"
-       r="28.575001" />
+       r="26.987499" />
     <circle
        style="fill:none;stroke:#000000;stroke-width:0.264583"
        id="circle284-8-1"
@@ -2615,7 +2615,7 @@
        id="path314" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.529167;stroke-opacity:1"
-       d="m 4113.6962,148.3906 82.55,-133.349998"
+       d="m 4112.3464,147.55501 82.55,-133.349995"
        id="path315" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.529166;stroke-opacity:1"
@@ -3288,5 +3288,22 @@
        sodipodi:arc-type="arc"
        d="m 4817.6442,76.618236 a 36.512501,36.512501 0 0 1 0,-51.636473"
        sodipodi:open="true" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583"
+       d="m 4772.0249,55.562499 117.475,0"
+       id="path407"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583"
+       d="m 4772.0249,49.212499 h 117.475"
+       id="path408" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583"
+       d="m 4772.0249,130.175 h 117.475"
+       id="path409" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583"
+       d="m 4772.8187,153.9875 h 115.8875"
+       id="path410" />
   </g>
 </svg>
