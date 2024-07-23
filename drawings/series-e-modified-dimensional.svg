@@ -24,9 +24,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="in"
      showgrid="true"
-     inkscape:zoom="1.0469406"
-     inkscape:cx="331.91949"
-     inkscape:cy="384.45351"
+     inkscape:zoom="0.5234703"
+     inkscape:cx="883.52672"
+     inkscape:cy="182.43633"
      inkscape:window-width="1920"
      inkscape:window-height="1027"
      inkscape:window-x="2248"
@@ -81,7 +81,9 @@
        dotted="false"
        gridanglex="30"
        gridanglez="30"
-       visible="true" />
+       visible="false"
+       enabled="false"
+       snapvisiblegridlinesonly="false" />
     <sodipodi:guide
        position="0,6.4"
        orientation="0,-1"
@@ -128,5 +130,36 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1" />
+     id="layer1">
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.0104167"
+       id="path1"
+       cx="2"
+       cy="-1.975"
+       r="1.6" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.0104167"
+       id="circle1"
+       cx="6"
+       cy="-1.975"
+       r="1.6" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.0104167"
+       id="circle2"
+       cx="10"
+       cy="-1.975"
+       r="1.6" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.0104167"
+       id="circle3"
+       cx="14"
+       cy="-1.975"
+       r="1.6" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.0104167"
+       id="circle4"
+       cx="18"
+       cy="-1.975"
+       r="1.6" />
+  </g>
 </svg>
