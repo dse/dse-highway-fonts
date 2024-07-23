@@ -1,19 +1,132 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
-<svg width="240in" height="12in" viewBox="0 0 6096.0001 304.8" version="1.1" id="svg1" inkscape:version="1.3 (0e150ed, 2023-07-21)" sodipodi:docname="series-c-drawing.svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview id="namedview1" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:document-units="in" showgrid="true" showguides="true" inkscape:zoom="0.50966756" inkscape:cx="417.91948" inkscape:cy="624.91715" inkscape:window-width="1440" inkscape:window-height="847" inkscape:window-x="0" inkscape:window-y="25" inkscape:window-maximized="1" inkscape:current-layer="layer1">
-    <inkscape:grid id="grid1" units="in" originx="0" originy="0" spacingx="0.79375001" spacingy="0.79375001" empcolor="#0099e5" empopacity="0.30196078" color="#0099e5" opacity="0.14901961" empspacing="4" dotted="true" gridanglex="30" gridanglez="30" visible="true" />
-    <inkscape:grid id="grid2" units="in" originx="0" originy="0" spacingx="6.3500001" spacingy="6.3500001" empcolor="#0099e5" empopacity="0.30196078" color="#0099e5" opacity="0.14901961" empspacing="4" dotted="false" gridanglex="30" gridanglez="30" visible="true" />
-    <sodipodi:guide position="-25.4,254" orientation="0,-1" id="guide3" inkscape:locked="false" />
-    <sodipodi:guide position="-25.4,228.6" orientation="0,-1" id="guide4" inkscape:locked="false" />
-    <sodipodi:guide position="-25.4,50.800004" orientation="0,-1" id="guide5" inkscape:locked="false" />
-    <sodipodi:guide position="-25.4,76.200003" orientation="0,-1" id="guide6" inkscape:locked="false" />
-    <sodipodi:guide position="-25.4,257.175" orientation="0,-1" id="guide7" inkscape:locked="false" />
-    <sodipodi:guide position="-25.4,231.775" orientation="0,-1" id="guide8" inkscape:locked="false" />
-    <sodipodi:guide position="-25.4,47.625004" orientation="0,-1" id="guide9" inkscape:locked="false" />
-    <sodipodi:guide position="-25.4,73.025003" orientation="0,-1" id="guide10" inkscape:locked="false" />
+<svg
+   width="256in"
+   height="8in"
+   viewBox="0 0 256 8"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="series-e-modified-dimensional.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="in"
+     showgrid="true"
+     inkscape:zoom="1.0469406"
+     inkscape:cx="331.91949"
+     inkscape:cy="384.45351"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="2248"
+     inkscape:window-y="410"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showguides="true">
+    <inkscape:grid
+       units="in"
+       originx="0"
+       originy="0"
+       spacingx="0.125"
+       spacingy="0.125"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="8"
+       dotted="false"
+       gridanglex="30"
+       gridanglez="30"
+       visible="true"
+       id="grid1" />
+    <inkscape:grid
+       id="grid2"
+       units="in"
+       originx="0"
+       originy="0"
+       spacingx="0.03125"
+       spacingy="0.03125"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="32"
+       dotted="true"
+       gridanglex="30"
+       gridanglez="30"
+       visible="true" />
+    <inkscape:grid
+       id="grid8"
+       units="in"
+       originx="0"
+       originy="0.125"
+       spacingx="1.6"
+       spacingy="1.6"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       dotted="false"
+       gridanglex="30"
+       gridanglez="30"
+       visible="true" />
+    <sodipodi:guide
+       position="0,6.4"
+       orientation="0,-1"
+       id="guide8"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,1.5999999"
+       orientation="0,-1"
+       id="guide9"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,8.125"
+       orientation="0,-1"
+       id="guide10"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,8"
+       orientation="0,-1"
+       id="guide11"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,-1.1920929e-07"
+       orientation="0,-1"
+       id="guide12"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,-0.125"
+       orientation="0,-1"
+       id="guide13"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,6.525"
+       orientation="0,-1"
+       id="guide14"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,1.4749999"
+       orientation="0,-1"
+       id="guide15"
+       inkscape:locked="false" />
   </sodipodi:namedview>
-  <defs id="defs1" />
-  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1" />
 </svg>
