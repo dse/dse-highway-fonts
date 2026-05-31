@@ -139,7 +139,6 @@ class MetricsMaker1966:
         first_classes = tuple([tuple(x) for x in PRECEDING_CLASSES])
         second_classes = tuple([tuple(x) for x in FOLLOWING_CLASSES])
         offsets = []
-        pairs = []
         for preceding_class in [[], *PRECEDING_CLASSES]:
             rsbs = [self.rsbs[x] for x in preceding_class]
             if len(list(set(rsbs))) > 1:
@@ -153,7 +152,6 @@ class MetricsMaker1966:
                     for fchar in following_class:
                         spacing = self.get_spacing(pchar , fchar)
                         spacings.append(spacing)
-                        pairs.append((pchar + fchar, spacing))
                 if len(list(set(spacings))) > 1:
                     raise Exception("spacings not all equal: %s %s" % (repr(preceding_class), repr(following_class)))
                 if len(spacings):
@@ -198,19 +196,6 @@ class MetricsMaker1966:
         if char in self.rsbs and not approx_equal(self.rsbs[char], value):
             raise Exception("rsb of %s (of pair %s) is set to %g but was going to set it to %g" % (repr(char), repr(pair), value, self.rsbs[char]))
         self.rsbs[char] = roundish(value)
-
-    def show_pairs(self):
-        for preceding_char in ALL_CHARS:
-            for following_char in ALL_CHARS:
-                pair = preceding_char + following_char
-                rsb = self.rsbs[preceding_char]
-                lsb = self.lsbs[following_char]
-                spacing = self.get_spacing(preceding_char, following_char)
-                if approx_equal(spacing, lsb + rsb):
-                    print(" " + pair + " ", end="")
-                else:
-                    print("(" + pair + ")", end="")
-            print("")
 
 def roundish(x):
     return round(x * 10000) / 10000
