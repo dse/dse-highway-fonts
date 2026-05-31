@@ -131,7 +131,6 @@ class MetricsMaker1966:
             self.metrics_2000 = self.font_data["2000"]
 
     def run(self):
-        self.set_symmetric_bearings("AHIMNOQSTUVWXYZ08")
         self.set_bearings(PRECEDING_CLASSES[0], FOLLOWING_CLASSES[0])
         self.set_bearings(PRECEDING_CLASSES[1], FOLLOWING_CLASSES[1])
         self.set_bearings(PRECEDING_CLASSES[2], FOLLOWING_CLASSES[1])
@@ -182,19 +181,6 @@ class MetricsMaker1966:
                     self.font[ord(preceding_char.lower())].right_side_bearing = round(bearing)
                 if following_char.lower() != following_char:
                     self.font[ord(following_char.lower())].left_side_bearing = round(bearing)
-
-    def set_symmetric_bearings(self, chars):
-        for char in chars:
-            pair = char + char
-            spacing = self.get_spacing(char, char)
-            bearing = roundish(spacing / 2)
-            self.set_lsb(char, bearing, pair=pair)
-            self.set_rsb(char, bearing, pair=pair)
-            self.font[ord(char)].left_side_bearing = round(bearing)
-            self.font[ord(char)].right_side_bearing = round(bearing)
-            if char.lower() != char:
-                self.font[ord(char.lower())].left_side_bearing = round(bearing)
-                self.font[ord(char.lower())].right_side_bearing = round(bearing)
 
     def get_code_number(self, preceding_char, following_char):
         return self.preceding_data[preceding_char][self.following_data[following_char] - 1]
