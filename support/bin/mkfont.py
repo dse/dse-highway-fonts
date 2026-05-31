@@ -26,6 +26,7 @@ def main():
     args = parser.parse_args()
     font = fontforge.font()
 
+    # SVG source files are based on these metrics.
     font.ascent = 960
     font.descent = 192
 
