@@ -36,13 +36,19 @@ def main():
             codepoint = int(root, 16)
         else:
             raise Exception("%s: invalid glyph filename: cannot extract codepoint from %s" % (glyph_filename, repr(root)))
-        glyph = font.createChar(codepoint)
-        font.strokedfont = True
-        print("importing %s" % glyph_filename)
-        glyph.importOutlines(glyph_filename, correctdir=True)
-        font.strokedfont = False
-        glyph.left_side_bearing = 0
-        glyph.right_side_bearing = 0
+
+        codepoints = [codepoint]
+        if chr(codepoint).lower() != chr(codepoint):
+            codepoints.append(codepoint + 32)
+
+        for cp in codepoints:
+            glyph = font.createChar(cp)
+            font.strokedfont = True
+            print("importing %s" % glyph_filename)
+            glyph.importOutlines(glyph_filename, correctdir=True)
+            font.strokedfont = False
+            glyph.left_side_bearing = 0
+            glyph.right_side_bearing = 0
 
     if args.metrics_2000:
         metrics = MetricsMaker2000(font, args.data_filename)
@@ -97,7 +103,9 @@ class MetricsMaker2000:
             rsb = roundish(self.metrics[char][2] * self.unit)
             self.font[ord(char)].left_side_bearing = round(lsb)
             self.font[ord(char)].right_side_bearing = round(rsb)
-
+            if char.lower() != char:
+                self.font[ord(char.lower())].left_side_bearing = round(lsb)
+                self.font[ord(char.lower())].right_side_bearing = round(rsb)
 
 class MetricsMaker1966:
     """
@@ -157,7 +165,7 @@ class MetricsMaker1966:
                                                                                                 ("grek", ("dflt", ), ),
                                                                                                 ("latn", ("dflt", ), ), ), ), ))
         self.font.addKerningClass("'kern' Horizontal Kerning lookup 0", "'kern' Horizontal Kerning lookup 0 subtable",
-                                  (None, *first_classes), (None, *second_classes), offsets)
+                                  (None, *first_classes, *[x.lower() for x in first_classes]), (None, *second_classes, *[x.lower() for x in second_classes]), offsets)
 
     def set_bearings(self, preceding_chars, following_chars):
         for preceding_char in preceding_chars:
@@ -169,6 +177,10 @@ class MetricsMaker1966:
                 self.set_lsb(following_char, bearing, pair=pair)
                 self.font[ord(preceding_char)].right_side_bearing = round(bearing)
                 self.font[ord(following_char)].left_side_bearing = round(bearing)
+                if preceding_char.lower() != preceding_char:
+                    self.font[ord(preceding_char.lower())].right_side_bearing = round(bearing)
+                if following_char.lower() != following_char:
+                    self.font[ord(following_char.lower())].left_side_bearing = round(bearing)
 
     def set_symmetric_bearings(self, chars):
         for char in chars:
@@ -179,6 +191,9 @@ class MetricsMaker1966:
             self.set_rsb(char, bearing, pair=pair)
             self.font[ord(char)].left_side_bearing = round(bearing)
             self.font[ord(char)].right_side_bearing = round(bearing)
+            if char.lower() != char:
+                self.font[ord(char.lower())].left_side_bearing = round(bearing)
+                self.font[ord(char.lower())].right_side_bearing = round(bearing)
 
     def get_code_number(self, preceding_char, following_char):
         return self.preceding_data[preceding_char][self.following_data[following_char] - 1]
