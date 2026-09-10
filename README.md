@@ -1,7 +1,8 @@
 # dse-highway-fonts
 
-These are _Standard Alphabets for Highway Signs_, painstakingly
-constructed from the original 1945 dimensional drawings.
+These are "Highway Gothic" fonts painstakingly constructed from the
+original dimensional drawings in the 1945 edition of _Standard
+Alphabets for Highway Signs_ by the Federal Highway Administration.
 
 ![dimensional drawings](images/letters.png)
 
@@ -18,6 +19,9 @@ added later.
 Kerning pairs are based on the 1966 edition of the document, which
 provided character spacing tables (and omitted the dimensional
 drawings in favor of 2-inch-high exact lettforms).
+
+At some point there may also be versions of the fonts using the
+advance widths from the 2000 edition of the document.
 
 Currently available:
 
@@ -79,3 +83,13 @@ Currently available:
 
 <!-- [2009]: https://mutcd.fhwa.dot.gov/kno_2009r1r2.htm -->
 
+## Other Highway Gothics
+
+-   URW's [SAA Series](https://www.paratype.com/fonts/urw/saa-series) also
+    includes a Series A.
+    
+-   Otherwhere Collective's [Highway VAR](https://otherwherecollective.com/fonts/highway-var/)
+    has width (Series B through F), Oblique, and Grade (thickness) axes.
+
+-   Sammi Ta's [Roadgeek 2014](https://github.com/sammdot/roadgeek-fonts) fonts
+    
